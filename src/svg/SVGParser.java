@@ -191,7 +191,7 @@ public class SVGParser
 		Double result = null;
 		try
 		{
-			result = new Double(Double.parseDouble(sb.toString()));
+			result = Double.parseDouble(sb.toString());
 		}
 		catch (Exception e)
 		{
@@ -218,7 +218,7 @@ public class SVGParser
 		Double result = null;
 		try
 		{
-			result = new Double(Double.parseDouble(sub));
+			result = Double.parseDouble(sub);
 		}
 		catch (Exception e)
 		{

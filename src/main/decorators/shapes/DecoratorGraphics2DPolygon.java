@@ -6,7 +6,6 @@ import java.awt.geom.Point2D;
 
 import main.decorators.DecoratorGraphics2D;
 import svg.element.BaseElement;
-import svg.element.shape.Circle;
 import svg.element.shape.Polygon;
 import svg.element.shape.Polyline;
 import svg.element.shape.Shape;
