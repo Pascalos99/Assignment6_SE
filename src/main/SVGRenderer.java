@@ -30,6 +30,8 @@ import svg.element.shape.Shape;
 import svg.element.style.StrokeWidth;
 import svg.element.style.Style;
 import view.SVGView;
+import static main.decorators.DecoratorGraphics2D.shapeDecorators;
+import static main.decorators.DecoratorGraphics2D.styleDecorators;;
 
 //-----------------------------------------------------------------------------
 
@@ -71,8 +73,10 @@ public class SVGRenderer
        	g2d.setPaint(new Color(255, 127, 0));
        	g2d.drawString("Draw SVG contents here.", 10, 20);
 
-       	RenderModifier rb = new RenderModifier(g2dImage);
-       	rb.takeShape(svg);
+       	RenderBuilder rb = new RenderBuilder(g2dImage);
+       	for (Element element : svg.elements())
+       		rb.drawElement(element);
+       	rb.close();
    	   	
        	if (!view.zoom())
        	{
@@ -101,30 +105,39 @@ public class SVGRenderer
 	
 	//-------------------------------------------------------------------------
 
-	static class RenderModifier {
+	static class RenderBuilder {
 		private final Graphics2D g2d;
-		public RenderModifier(final Graphics2D g) {
+		private boolean open = true;
+		public RenderBuilder(final Graphics2D g) {
 			g2d = g;
 		}
 		
-		public void takeShape(SVG svg) {
-			for (Element element : svg.elements()) {
-				Shape shape; Decorator decorator;
-				switch (element.label()){
-				case "circle":
-					shape = (Circle)element; 
-					decorator = new DecoratorGraphics2DCircle((Circle)shape, g2d);
-				break;
+		public boolean drawElement(Element element) {
+			if (!open) return false;
+			draw(element);
+			return true;
+		}
+		
+		private void draw(Element element) {
+			Decorator shape_decorator = null;
+			Decorator style_decorator = null;
+			Shape shape = (Shape)element;
+			for (int i=0; i < shapeDecorators.length; i++)
+				if (shape.label().equals(shapeDecorators[i].decorator_label)) {
+					shape_decorator = shapeDecorators[i].createDecoratorInstance(shape, null, g2d);
+					break;
 				}
-			}
-			for (Style style : shape.styles()) {
-				 switch (style.label()) {
-				 case "stroke-width":
-				 new DecoratorGraphics2DStrokeWidth
-				 ((StrokeWidth)style, g2dImage).render();
-				 break;
-				 } 
-			}
+			for (Style style : shape.styles())
+				for (int i=0; i < styleDecorators.length; i++)
+					if (style.label().equals(styleDecorators[i].decorator_label))
+						style_decorator = styleDecorators[i].
+							createDecoratorInstance(style_decorator, style, g2d);
+			if (style_decorator != null) style_decorator.render();
+			if (shape_decorator != null) shape_decorator.render();
+		}
+		
+		public void close() {
+			open = false;
 		}
 	}
 	

@@ -10,7 +10,7 @@ import svg.element.style.Style;
 public abstract class DecoratorGraphics2D extends Decorator
 {
 	final protected Graphics2D graphics2D;
-	public final String label;
+	public final String decorator_label;
 	
 	public final static DecoratorGraphics2D[] styleDecorators = {
 			new DecoratorGraphics2DStrokeWidth(null, null)
@@ -23,7 +23,7 @@ public abstract class DecoratorGraphics2D extends Decorator
 	{
 		super(base, style);
 		this.graphics2D = g2d;
-		this.label = label;
+		decorator_label = label;
 	}
 
 	@Override
