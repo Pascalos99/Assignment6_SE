@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -70,9 +71,8 @@ public class SVGRenderer
        	g2d.setPaint(new Color(255, 127, 0));
        	g2d.drawString("Draw SVG contents here.", 10, 20);
 
-       	// **
-       	// ** TODO: Draw SVG contents here.
-       	// **
+       	RenderModifier rb = new RenderModifier(g2dImage);
+       	rb.takeShape(svg);
    	   	
        	if (!view.zoom())
        	{
@@ -101,4 +101,31 @@ public class SVGRenderer
 	
 	//-------------------------------------------------------------------------
 
+	static class RenderModifier {
+		private final Graphics2D g2d;
+		public RenderModifier(final Graphics2D g) {
+			g2d = g;
+		}
+		
+		public void takeShape(SVG svg) {
+			for (Element element : svg.elements()) {
+				Shape shape; Decorator decorator;
+				switch (element.label()){
+				case "circle":
+					shape = (Circle)element; 
+					decorator = new DecoratorGraphics2DCircle((Circle)shape, g2d);
+				break;
+				}
+			}
+			for (Style style : shape.styles()) {
+				 switch (style.label()) {
+				 case "stroke-width":
+				 new DecoratorGraphics2DStrokeWidth
+				 ((StrokeWidth)style, g2dImage).render();
+				 break;
+				 } 
+			}
+		}
+	}
+	
 }

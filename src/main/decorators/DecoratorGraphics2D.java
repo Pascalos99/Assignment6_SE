@@ -2,13 +2,21 @@ package main.decorators;
 
 import java.awt.Graphics2D;
 
+import main.decorators.styles.DecoratorGraphics2DStrokeWidth;
 import svg.element.BaseElement;
 import svg.element.Element;
 import svg.element.style.Style;
 
-public class DecoratorGraphics2D extends Decorator
+public abstract class DecoratorGraphics2D extends Decorator
 {
 	final protected Graphics2D graphics2D;
+	
+	public final static DecoratorGraphics2D[] styleDecorators = {
+			new DecoratorGraphics2DStrokeWidth(null, null)
+	};
+	public static final DecoratorGraphics2D[] shapeDecorators = {
+			
+	};
 	
 	public DecoratorGraphics2D(final BaseElement base, final Style style, final Graphics2D g2d)
 	{
@@ -40,5 +48,7 @@ public class DecoratorGraphics2D extends Decorator
 		component.setBounds();
 		
 	}
+	
+	public abstract DecoratorGraphics2D createDecoratorInstance(BaseElement base, Style style, Graphics2D g2d);
 
 }
