@@ -41,8 +41,8 @@ public class SVGView extends JPanel
        	g2d.setPaint(Color.white);
        	g2d.fillRect(0, 0, getWidth(), getHeight());
 
-       	g2d.setPaint(new Color(0, 127, 255));
-       	g2d.drawString("Draw SVG contents here.", 10, 20);
+       	//g2d.setPaint(new Color(0, 127, 255));
+       	//g2d.drawString("Draw SVG contents here.", 10, 20);
     }
     
     //-------------------------------------------------------------------------

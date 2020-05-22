@@ -53,7 +53,6 @@ public class SVGRenderer
        	g2dImage.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
        	g2dImage.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
        	
-       	g2d.setPaint(new Color(255, 127, 0));
 
        	RenderBuilder rb = new RenderBuilder(g2dImage);
        	for (Element element : svg.elements())
