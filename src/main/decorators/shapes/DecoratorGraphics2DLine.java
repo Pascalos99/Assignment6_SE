@@ -3,14 +3,17 @@ package main.decorators.shapes;
 import java.awt.Graphics2D;
 
 import main.decorators.DecoratorGraphics2D;
+import svg.element.BaseElement;
+import svg.element.shape.Circle;
 import svg.element.shape.Line;
 import svg.element.shape.Shape;
+import svg.element.style.Style;
 
 public class DecoratorGraphics2DLine extends DecoratorGraphics2D
 {
 	public DecoratorGraphics2DLine(final Line base, final Graphics2D g2d)
 	{
-		super(base, null, g2d);
+		super("line", base, null, g2d);
 	}
 
 	@Override
@@ -27,6 +30,11 @@ public class DecoratorGraphics2DLine extends DecoratorGraphics2D
 			graphics2D.setPaint(((Shape)component).strokeColour());
 			graphics2D.drawLine(x1, y1, x2, y2);
 		}
+	}
+
+	@Override
+	public DecoratorGraphics2D createDecoratorInstance(BaseElement base, Style style, Graphics2D g2d) {
+		return new DecoratorGraphics2DLine((Line)base, g2d);
 	}
 
 }
