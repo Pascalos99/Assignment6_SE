@@ -20,7 +20,7 @@ public abstract class DecoratorGraphics2D extends Decorator
 	public final String decorator_label;
 	
 	public final static DecoratorGraphics2D[] styleDecorators = {
-			new DecoratorGraphics2DStrokeWidth(null, null)
+			new DecoratorGraphics2DStrokeWidth(null, null, null)
 	};
 	public static final DecoratorGraphics2D[] shapeDecorators = {
 			new DecoratorGraphics2DCircle(null, null),
