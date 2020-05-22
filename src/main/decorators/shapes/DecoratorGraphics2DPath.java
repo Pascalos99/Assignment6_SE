@@ -4,15 +4,17 @@ import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
 
 import main.decorators.DecoratorGraphics2D;
+import svg.element.BaseElement;
 import svg.element.shape.Shape;
 import svg.element.shape.path.Path;
 import svg.element.shape.path.PathOp;
+import svg.element.style.Style;
 
 public class DecoratorGraphics2DPath extends DecoratorGraphics2D
 {
 	public DecoratorGraphics2DPath(final Path base, final Graphics2D g2d)
 	{
-		super(base, null, g2d);
+		super("path", base, null, g2d);
 	}
 
 	@Override
@@ -34,6 +36,11 @@ public class DecoratorGraphics2DPath extends DecoratorGraphics2D
 			graphics2D.setPaint(((Shape)component).strokeColour());
 			graphics2D.draw(path);
 		}
+	}
+
+	@Override
+	public DecoratorGraphics2D createDecoratorInstance(BaseElement base, Style style, Graphics2D g2d) {
+		return new DecoratorGraphics2DPath((Path)base, g2d);
 	}
 
 }

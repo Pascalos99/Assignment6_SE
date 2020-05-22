@@ -5,15 +5,18 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 
 import main.decorators.DecoratorGraphics2D;
+import svg.element.BaseElement;
+import svg.element.shape.Circle;
 import svg.element.shape.Polygon;
 import svg.element.shape.Polyline;
 import svg.element.shape.Shape;
+import svg.element.style.Style;
 
 public class DecoratorGraphics2DPolygon extends DecoratorGraphics2D
 {
 	public DecoratorGraphics2DPolygon(final Polygon base, final Graphics2D g2d)
 	{
-		super(base, null, g2d);
+		super("polygon", base, null, g2d);
 	}
 
 	@Override
@@ -42,6 +45,11 @@ public class DecoratorGraphics2DPolygon extends DecoratorGraphics2D
 			graphics2D.setPaint(((Shape)component).strokeColour());
 			graphics2D.draw(path);
 		}
+	}
+
+	@Override
+	public DecoratorGraphics2D createDecoratorInstance(BaseElement base, Style style, Graphics2D g2d) {
+		return new DecoratorGraphics2DPolygon((Polygon)base, g2d);
 	}
 
 }
