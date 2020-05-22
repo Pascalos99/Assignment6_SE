@@ -3,7 +3,6 @@ package main.decorators.styles;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 
-import main.decorators.Decorator;
 import main.decorators.DecoratorGraphics2D;
 import svg.element.BaseElement;
 import svg.element.style.StrokeWidth;
