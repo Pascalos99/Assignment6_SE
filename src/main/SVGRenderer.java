@@ -2,32 +2,15 @@ package main;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 import main.decorators.Decorator;
-import main.decorators.shapes.DecoratorGraphics2DCircle;
-import main.decorators.shapes.DecoratorGraphics2DEllipse;
-import main.decorators.shapes.DecoratorGraphics2DLine;
-import main.decorators.shapes.DecoratorGraphics2DPath;
-import main.decorators.shapes.DecoratorGraphics2DPolygon;
-import main.decorators.shapes.DecoratorGraphics2DPolyline;
-import main.decorators.shapes.DecoratorGraphics2DRect;
-import main.decorators.styles.DecoratorGraphics2DStrokeWidth;
 import svg.SVG;
 import svg.SVGParser;
 import svg.element.Element;
-import svg.element.shape.Circle;
-import svg.element.shape.Rect;
-import svg.element.shape.Line;
-import svg.element.shape.Ellipse;
-import svg.element.shape.Polyline;
-import svg.element.shape.Polygon;
-import svg.element.shape.path.Path;
 import svg.element.shape.Shape;
-import svg.element.style.StrokeWidth;
 import svg.element.style.Style;
 import view.SVGView;
 import static main.decorators.DecoratorGraphics2D.shapeDecorators;
@@ -70,8 +53,7 @@ public class SVGRenderer
        	g2dImage.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
        	g2dImage.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
        	
-       	//g2d.setPaint(new Color(255, 127, 0));
-       	//g2d.drawString("Draw SVG contents here.", 10, 20);
+       	g2d.setPaint(new Color(255, 127, 0));
 
        	RenderBuilder rb = new RenderBuilder(g2dImage);
        	for (Element element : svg.elements())
